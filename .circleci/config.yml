@@ -14,9 +14,9 @@ jobs:
     steps:
         - checkout
         - run: echo "Double trouble"
-  workflows:
-    version: 2.1
-    hengly_art:
-      jobs:
-        - hengly
-        - art
+workflows:
+  version: 2.1
+  hengly_art:
+    jobs:
+      - hengly
+      - art
