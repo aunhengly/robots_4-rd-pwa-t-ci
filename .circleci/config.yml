@@ -1,0 +1,22 @@
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  hengly:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+        - checkout
+        - run: echo "Say hello to YAML!"
+  art:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+        - checkout
+        - run: echo "Double trouble"
+  workflows:
+    version: 2.1
+    hengly_art:
+      jobs:
+        - hengly
+        - art
