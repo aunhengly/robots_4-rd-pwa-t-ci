@@ -1,22 +1,34 @@
 # CircleCI configuration file
-version: 2.1
-
+version: 2
 jobs:
-  hengly:
+  build:
     docker:
-     - image: cimg/base:2022.05
+      - image: circleci/node:8.9
     steps:
-        - checkout
-        - run: echo "Say hello to YAML!"
-  art:
+      - checkout
+      - run: echo "npm installing"
+      - run: npm install
+      - run: CI=true npm run build
+  test:
     docker:
-     - image: cimg/base:2022.05
+      - image: circleci/node:8.9
     steps:
-        - checkout
-        - run: echo "Double trouble"
-  workflows:
-    version: 2.1
-    hengly_art:
-      jobs:
-        - hengly
-        - art
+      - checkout
+      - run: echo "testing stuff"
+      - run: npm install
+      - run: npm test
+  hithere:
+    docker:
+      - image: circleci/node:8.9
+    steps:
+      - checkout
+      -run: echo "Heeelllloo"
+workflows:
+  version: 2
+  build_test_and_lint:
+    jobs:
+      - build
+      - hithere
+      - test
+          requires:
+            - hithere
